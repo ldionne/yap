@@ -23,16 +23,17 @@
       </h5>
 <p>
         Boost.YAP consists of expressions and functions that operate on them. Any
-        type that models the <a class="link" href="../../">Expression</a> concept
-        will work with any of the functions in Boost.YAP that takes an expression.
+        type that models the <a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
+        concept will work with any of the functions in Boost.YAP that takes an expression.
       </p>
 <p>
         For a type <code class="computeroutput"><span class="identifier">T</span></code> to model the
-        <a class="link" href="../../">Expression</a> concept, <code class="computeroutput"><span class="identifier">T</span></code>
-        must contain at least an <code class="computeroutput"><a class="link" href="../../boost/yap/expr_kind.html" title="Type expr_kind">expr_kind</a></code> (terminal, plus-operation,
-        etc.) and a <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">hana</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;&gt;</span></code>
-        of values. That's it. This means that user-defined templates modelling <a class="link" href="../../">ExpressionTemplate</a> are very straightforward
-        to make.
+        <a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
+        concept, <code class="computeroutput"><span class="identifier">T</span></code> must contain at
+        least an <code class="computeroutput"><a class="link" href="../../boost/yap/expr_kind.html" title="Type expr_kind">expr_kind</a></code>
+        (terminal, plus-operation, etc.) and a <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">hana</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;&gt;</span></code> of values. That's it. This means
+        that user-defined templates modelling <a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expressiontemplate">ExpressionTemplate</a>
+        are very straightforward to make.
       </p>
 <div class="note"><table border="0" summary="Note">
 <tr>
@@ -42,8 +43,8 @@
 <tr><td align="left" valign="top"><p>
           The <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">hana</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;&gt;</span></code>
           of values is also constrained, based on the kind of the expression; see
-          the full <a class="link" href="../../">Expression</a> documentation for
-          details.
+          the full <a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
+          documentation for details.
         </p></td></tr>
 </table></div>
 <p>
@@ -62,12 +63,12 @@
 <p>
       </p>
 <p>
-        That's a template that models <a class="link" href="../../">ExpressionTemplate</a>.
-        Instantiated with the proper template parameters, it produces <a class="link" href="../../">Expression</a>s.
+        That's a template that models <a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expressiontemplate">ExpressionTemplate</a>.
+        Instantiated with the proper template parameters, it produces <a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expression">Expressions</a>.
       </p>
 <p>
         Ok, so it's not that interesting by itself -- it has no operators. But we
-        can still use it with the Boost.YAP functions that take an <a class="link" href="../../">Expression</a>.
+        can still use it with the Boost.YAP functions that take an <a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>.
         Let's make a plus-expression manually:
       </p>
 <p>
@@ -94,12 +95,63 @@
 </pre>
 <p>
       </p>
+<p>
+        There is a reference model of the <a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expressiontemplate">ExpressionTemplate</a>
+        concept that comes with Boost.YAP: <code class="computeroutput"><a class="link" href="../../boost/yap/expression.html" title="Struct template expression">expression&lt;&gt;</a></code>.
+        It has all the member operators defined, and the nonmember operators and
+        the <code class="computeroutput"><span class="identifier">if_else</span></code> pseudo-operator
+        are defined in their repsective headers.
+      </p>
+<p>
+        <code class="computeroutput"><a class="link" href="../../boost/yap/expression.html" title="Struct template expression">expression&lt;&gt;</a></code> is great for prototyping,
+        and for quick-and-dirty uses of expression template, but its use of every
+        single operator makes it a suboptimal choice for most use cass.
+      </p>
 <h5>
 <a name="boost_yap__proposed_.manual.tutorial.h1"></a>
+        <span class="phrase"><a name="boost_yap__proposed_.manual.tutorial.kinds_of_expressions"></a></span><a class="link" href="tutorial.html#boost_yap__proposed_.manual.tutorial.kinds_of_expressions">Kinds
+        of Expressions</a>
+      </h5>
+<p>
+        There are four special kinds of expression.
+      </p>
+<div class="variablelist">
+<p class="title"><b>Special Expression Kinds</b></p>
+<dl class="variablelist">
+<dt><span class="term"><a class="link" href="../../boost/yap/expr_kind.html#boost.yap.expr_kind.terminal"><code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">yap</span><span class="special">::</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">terminal</span></code></a></span></dt>
+<dd><p>
+              A terminal contains a non-Expression value, and represents the leaf-node
+              in an expression tree.
+            </p></dd>
+<dt><span class="term"><a class="link" href="../../boost/yap/expr_kind.html#boost.yap.expr_kind.placeholder"><code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">yap</span><span class="special">::</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">placeholder</span></code></a></span></dt>
+<dd><p>
+              A placeholder is a stand-in for some value to be provided later.
+            </p></dd>
+<dt><span class="term"><a class="link" href="../../boost/yap/expr_kind.html#boost.yap.expr_kind.if_else"><code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">yap</span><span class="special">::</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">if_else</span></code></a></span></dt>
+<dd><p>
+              An <code class="computeroutput"><span class="identifier">if_else</span></code> expression
+              is analogous to the C++ ternary operator (<code class="computeroutput"><span class="special">?:</span></code>),
+              but without the common-type conversion logic.
+            </p></dd>
+<dt><span class="term"><a class="link" href="../../boost/yap/expr_kind.html#boost.yap.expr_kind.expr_ref"><code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">yap</span><span class="special">::</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span></code></a></span></dt>
+<dd><p>
+              An <code class="computeroutput"><span class="identifier">exp_ref</span></code> expression
+              is one that acts as a (possibly <code class="computeroutput"><span class="keyword">const</span></code>)
+              lvalue reference to another expression. It exists to prevent unnecessary
+              copies of expressions.
+            </p></dd>
+</dl>
+</div>
+<p>
+        The other expression kinds are all the overloadable operators, See <code class="computeroutput"><a class="link" href="../../boost/yap/expr_kind.html" title="Type expr_kind">expr_kind</a></code>
+        for the full list.
+      </p>
+<h5>
+<a name="boost_yap__proposed_.manual.tutorial.h2"></a>
         <span class="phrase"><a name="boost_yap__proposed_.manual.tutorial.operators"></a></span><a class="link" href="tutorial.html#boost_yap__proposed_.manual.tutorial.operators">Operators</a>
       </h5>
 <p>
-        Now, let's see an expression template type with some operators:
+        Let's see an expression template type with some operators:
       </p>
 <p>
 </p>
@@ -122,13 +174,245 @@
 <p>
       </p>
 <p>
-        Those macros are used to define operator overloads that return <a class="link" href="../../">Expression</a>s.
+        Those macros are used to define operator overloads that return <a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expression">Expressions</a>.
         As shown here, that sort of operator can be mixed with normal, non-lazy ones.
       </p>
 <p>
         Use of the macros is not necessary (you can write your own operators that
-        return <a class="link" href="../../">Expression</a>s if you like), but
-        it is suitable 99% of the time
+        return <a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expression">Expressions</a>
+        if you like), but it is suitable 99% of the time.
+      </p>
+<p>
+        Making the operators easy to define like this allows you to define custom
+        expression templates that have only the operators defined that are appropriate
+        for your use case.
+      </p>
+<h5>
+<a name="boost_yap__proposed_.manual.tutorial.h3"></a>
+        <span class="phrase"><a name="boost_yap__proposed_.manual.tutorial.operator_macros"></a></span><a class="link" href="tutorial.html#boost_yap__proposed_.manual.tutorial.operator_macros">Operator Macros</a>
+      </h5>
+<p>
+        There are macros that define binary operators as members and as nonmembers.
+        For a given operator the member-defining macro will define an operator that
+        accepts anything on the right (making a terminal out of a non-<a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
+        operand); the nonmember-defining macro will define an operator that will
+        only accept a non-<a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
+        on the left and an <a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
+        on the right. This is to avoid creating ambiguous overload sets. Here are
+        the macros and their uses:
+      </p>
+<div class="table">
+<a name="boost_yap__proposed_.manual.tutorial.t0"></a><p class="title"><b>Table&#160;1.1.&#160;Unary and Binary Operator-Defining Macros</b></p>
+<div class="table-contents"><table class="table" summary="Unary and Binary Operator-Defining Macros">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                <p>
+                  Macro
+                </p>
+              </th>
+<th>
+                <p>
+                  First/Left Operand
+                </p>
+              </th>
+<th>
+                <p>
+                  Right Operand
+                </p>
+              </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+                <p>
+                  <code class="computeroutput"><a class="link" href="../../BOOST_YAP_USER_UNARY_OPERATOR_MEMBER.html" title="Macro BOOST_YAP_USER_UNARY_OPERATOR_MEMBER">BOOST_YAP_USER_UNARY_OPERATOR_MEMBER</a></code>
+                </p>
+              </td>
+<td>
+                <p>
+                  Any type.
+                </p>
+              </td>
+<td>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <code class="computeroutput"><a class="link" href="../../BOOST_YAP_USER_BINARY_OPERATOR_MEMBER.html" title="Macro BOOST_YAP_USER_BINARY_OPERATOR_MEMBER">BOOST_YAP_USER_BINARY_OPERATOR_MEMBER</a></code>
+                </p>
+              </td>
+<td>
+                <p>
+                  Any type.
+                </p>
+              </td>
+<td>
+                <p>
+                  Any type.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <code class="computeroutput"><a class="link" href="../../BOOST_YAP_USER_FREE_BINARY_OPERATOR.html" title="Macro BOOST_YAP_USER_FREE_BINARY_OPERATOR">BOOST_YAP_USER_FREE_BINARY_OPERATOR</a></code>
+                </p>
+              </td>
+<td>
+                <p>
+                  Any non-<a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>.
+                </p>
+              </td>
+<td>
+                <p>
+                  <a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <code class="computeroutput"><a class="link" href="../../BOOST_YAP_USER_UDT_UNARY_OPERATOR.html" title="Macro BOOST_YAP_USER_UDT_UNARY_OPERATOR">BOOST_YAP_USER_UDT_UNARY_OPERATOR</a></code>
+                </p>
+              </td>
+<td>
+                <p>
+                  Any non-<a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
+                  that satisfies the given type trait.
+                </p>
+              </td>
+<td>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <code class="computeroutput"><a class="link" href="../../BOOST_YAP_USER_UDT_UDT_BINARY_OPERATOR.html" title="Macro BOOST_YAP_USER_UDT_UDT_BINARY_OPERATOR">BOOST_YAP_USER_UDT_UDT_BINARY_OPERATOR</a></code>
+                </p>
+              </td>
+<td>
+                <p>
+                  Any non-<a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
+                  that satisfies the given (left-hand) type trait.
+                </p>
+              </td>
+<td>
+                <p>
+                  Any non-<a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
+                  that satisfies the given (right-hand) type trait.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <code class="computeroutput"><a class="link" href="../../BOOST_YAP_USER_UDT_ANY_BINARY_OPERATOR.html" title="Macro BOOST_YAP_USER_UDT_ANY_BINARY_OPERATOR">BOOST_YAP_USER_UDT_ANY_BINARY_OPERATOR</a></code>
+                </p>
+              </td>
+<td>
+                <p>
+                  Any non-<a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>.
+                </p>
+              </td>
+<td>
+                <p>
+                  At least one parameter must satisfy the given type trait.
+                </p>
+              </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<br class="table-break"><div class="table">
+<a name="boost_yap__proposed_.manual.tutorial.t1"></a><p class="title"><b>Table&#160;1.2.&#160;The Other Operator-Defining Macros</b></p>
+<div class="table-contents"><table class="table" summary="The Other Operator-Defining Macros">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                <p>
+                  Macro
+                </p>
+              </th>
+<th>
+                <p>
+                  Operands
+                </p>
+              </th>
+<th>
+                <p>
+                  Notes
+                </p>
+              </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+                <p>
+                  <code class="computeroutput"><a class="link" href="../../BOOST_YAP_USER_MEMBER_CALL_OPERATOR.html" title="Macro BOOST_YAP_USER_MEMBER_CALL_OPERATOR">BOOST_YAP_USER_MEMBER_CALL_OPERATOR</a></code>
+                </p>
+              </td>
+<td>
+                <p>
+                  Any type.
+                </p>
+              </td>
+<td>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <code class="computeroutput"><a class="link" href="../../BOOST_YAP_USER_EXPR_IF_ELSE.html" title="Macro BOOST_YAP_USER_EXPR_IF_ELSE">BOOST_YAP_USER_EXPR_IF_ELSE</a></code>
+                </p>
+              </td>
+<td>
+                <p>
+                  Any type.
+                </p>
+              </td>
+<td>
+                <p>
+                  At least one parameter must be an <a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <code class="computeroutput"><a class="link" href="../../BOOST_YAP_USER_UDT_ANY_IF_ELSE.html" title="Macro BOOST_YAP_USER_UDT_ANY_IF_ELSE">BOOST_YAP_USER_UDT_ANY_IF_ELSE</a></code>
+                </p>
+              </td>
+<td>
+                <p>
+                  Any non-<a class="link" href="../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>.
+                </p>
+              </td>
+<td>
+                <p>
+                  At least one parameter must satisfy the given type trait.
+                </p>
+              </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<br class="table-break"><h5>
+<a name="boost_yap__proposed_.manual.tutorial.h4"></a>
+        <span class="phrase"><a name="boost_yap__proposed_.manual.tutorial.how_expression_operands_are_treated"></a></span><a class="link" href="tutorial.html#boost_yap__proposed_.manual.tutorial.how_expression_operands_are_treated">How
+        Expression Operands Are Treated</a>
+      </h5>
+<p>
+        TODO
       </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
