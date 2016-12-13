@@ -47,7 +47,8 @@
 <p>
       However, this can come at a high cost. Expression templates are costly to implement
       and maintain. Each of <a href="http://eigen.tuxfamily.org" target="_top">Eigen</a>
-      and Boost.Ublas has a large volume of complex expression template code.
+      and Boost.Ublas has a large volume of complex expression template code that
+      cannot be reused elsewhere.
     </p>
 <p>
       To date, the best solution to this problem of high implementation cost has
@@ -79,6 +80,10 @@
     </p>
 <p>
       - Easy-to-use custom explicit transformations via <code class="computeroutput"><a class="link" href="../boost/yap/transform.html" title="Function template transform">transform()</a></code>.
+    </p>
+<p>
+      - Expression tree semantics as close to those of builtin C++ expressions as
+      possible.
     </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
