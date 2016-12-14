@@ -21,7 +21,7 @@
 <p>
           Finally, it starts to get interesting! This example shows how you can add
           plus and other operations to sequences of data without creating temporaries
-          (and allocating memory).
+          and allocating memory.
         </p>
 <div class="note"><table border="0" summary="Note">
 <tr>
@@ -31,7 +31,7 @@
 <tr><td align="left" valign="top"><p>
             In this example, we see a terminal type that owns the storage of its
             value, a <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span><span class="keyword">double</span><span class="special">&gt;</span></code>.
-            See the Vector example later on to see one that does not.
+            See the Vector example later on to see a terminal type that does not.
           </p></td></tr>
 </table></div>
 <p>
@@ -96,7 +96,7 @@
     <span class="keyword">return</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">yap</span><span class="special">::</span><span class="identifier">make_terminal</span><span class="special">&lt;</span><span class="identifier">lazy_vector_expr</span><span class="special">,</span> <span class="keyword">double</span><span class="special">&gt;(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(</span><span class="identifier">x</span><span class="special">));</span>
 <span class="special">}</span>
 
-<span class="comment">// In order to define the += operator with the semantice we want, its</span>
+<span class="comment">// In order to define the += operator with the semantics we want, it's</span>
 <span class="comment">// convenient to derive a terminal type from a terminal instantiation of</span>
 <span class="comment">// lazy_vector_expr.  note that we could have written a template</span>
 <span class="comment">// specialization here instead -- either one would work.  That would of course</span>

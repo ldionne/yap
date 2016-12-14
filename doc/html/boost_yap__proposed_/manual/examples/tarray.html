@@ -62,10 +62,10 @@
 <span class="keyword">template</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">yap</span><span class="special">::</span><span class="identifier">expr_kind</span> <span class="identifier">Kind</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">Tuple</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">tarray_expr</span>
 <span class="special">{</span>
-    <span class="comment">// Make sure that, if this expression is a terminal, that its value is one</span>
-    <span class="comment">// we want to support.  Note that the presence of expr_kind::expr_ref</span>
-    <span class="comment">// makes life slightly more difficult; we have to account for int const &amp;</span>
-    <span class="comment">// and int &amp; as well as int.</span>
+    <span class="comment">// Make sure that, if this expression is a terminal, its value is one we</span>
+    <span class="comment">// want to support.  Note that the presence of expr_kind::expr_ref makes</span>
+    <span class="comment">// life slightly more difficult; we have to account for int const &amp; and</span>
+    <span class="comment">// int &amp; as well as int.</span>
     <span class="keyword">static_assert</span><span class="special">(</span>
         <span class="identifier">Kind</span> <span class="special">!=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">yap</span><span class="special">::</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">terminal</span> <span class="special">||</span>
         <span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">Tuple</span><span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">hana</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">int</span> <span class="keyword">const</span> <span class="special">&amp;&gt;&gt;{}</span> <span class="special">||</span>
@@ -103,8 +103,8 @@
 <span class="identifier">take_nth</span><span class="special">::</span><span class="keyword">operator</span><span class="special">()</span> <span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">yap</span><span class="special">::</span><span class="identifier">terminal</span><span class="special">&lt;</span><span class="identifier">tarray_expr</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">array</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">,</span> <span class="number">3</span><span class="special">&gt;&gt;</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">expr</span><span class="special">)</span>
 <span class="special">{</span>
     <span class="keyword">int</span> <span class="identifier">x</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">yap</span><span class="special">::</span><span class="identifier">value</span><span class="special">(</span><span class="identifier">expr</span><span class="special">)[</span><span class="identifier">n</span><span class="special">];</span>
-    <span class="comment">// Again, the move hack to get x into the resulting terminal as a value</span>
-    <span class="comment">// instead of a reference.</span>
+    <span class="comment">// Again, this is the move hack to get x into the resulting terminal as a</span>
+    <span class="comment">// value instead of a reference.</span>
     <span class="keyword">return</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">yap</span><span class="special">::</span><span class="identifier">make_terminal</span><span class="special">&lt;</span><span class="identifier">tarray_expr</span><span class="special">&gt;(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(</span><span class="identifier">x</span><span class="special">));</span>
 <span class="special">}</span>
 

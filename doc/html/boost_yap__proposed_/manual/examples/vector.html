@@ -20,8 +20,8 @@
 <p>
           So far we've only seen examples with custom terminals that own the values
           in the expressions we operate on. What happens when you've got types that
-          you want to operate on, without non-intrusively? Here's how you might do
-          it with <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;&gt;</span></code>s:
+          you want to operate on, non-intrusively? Here's how you might do it with
+          <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;&gt;</span></code>s:
         </p>
 <p>
 </p>
@@ -134,7 +134,7 @@
         <span class="identifier">d</span><span class="special">.</span><span class="identifier">push_back</span><span class="special">(</span><span class="identifier">i</span><span class="special">);</span>
     <span class="special">}</span>
 
-    <span class="comment">// After this point, no allcations occur.</span>
+    <span class="comment">// After this point, no allocations occur.</span>
 
     <span class="identifier">assign</span><span class="special">(</span><span class="identifier">b</span><span class="special">,</span> <span class="number">2</span><span class="special">);</span>
     <span class="identifier">assign</span><span class="special">(</span><span class="identifier">d</span><span class="special">,</span> <span class="identifier">a</span> <span class="special">+</span> <span class="identifier">b</span> <span class="special">*</span> <span class="identifier">c</span><span class="special">);</span>

@@ -107,8 +107,8 @@
           </p>
 <p>
             <code class="computeroutput"><a class="link" href="../../../boost/yap/expression.html" title="Struct template expression">expression&lt;&gt;</a></code> is great for prototyping,
-            and for quick-and-dirty uses of expression template, but its use of every
-            single operator makes it a suboptimal choice for most use cass.
+            and for quick-and-dirty uses of expression templates, but its use of
+            every single operator makes it a suboptimal choice for most use cass.
           </p>
 </td></tr>
 </table></div>
@@ -119,7 +119,7 @@
 </tr>
 <tr><td align="left" valign="top"><p>
             Because Boost.YAP operates on <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expressions</a>,
-            it is possible to mix-and-match <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expressions</a>
+            it is possible to mix and match <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expressions</a>
             that are instantiations of different templates. An expression containing
             an <code class="computeroutput"><a class="link" href="../../../boost/yap/expression.html" title="Struct template expression">expression&lt;&gt;</a></code> subexpression and
             subexpressions instantiated from N other <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expressiontemplate">ExpressionTemplates</a>
@@ -127,6 +127,16 @@
             Boost.YAP functions.
           </p></td></tr>
 </table></div>
+<p>
+          One more thing. It is important to remember that Boost.YAP expressions
+          are all-lazy, all the time. There is no auto-evaluation of a Boost.YAP
+          expression like there was with Proto. If you want your expressions to be
+          evaluated, you must call <code class="computeroutput"><a class="link" href="../../../boost/yap/transform.html" title="Function template transform">evaluate()</a></code>
+          or <code class="computeroutput"><a class="link" href="../../../boost/yap/transform.html" title="Function template transform">evaluate_as()</a></code>, enable <code class="computeroutput"><a class="link" href="../../../BOOST_YAP_CONVERSION_OPERATOR_TEMPLATE.html" title="Macro BOOST_YAP_CONVERSION_OPERATOR_TEMPLATE">BOOST_YAP_CONVERSION_OPERATOR_TEMPLATE</a></code>
+          (a dubious solution), or define non-lazy operations that force evaluation
+          where and when you want it. This last approach is usually the right one,
+          and there are lots of examples of how to do this in the Examples section.
+        </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

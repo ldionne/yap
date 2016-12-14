@@ -18,7 +18,7 @@
 <a name="boost_yap__proposed_.manual.examples.vec3"></a><a class="link" href="vec3.html" title="Vec3">Vec3</a>
 </h4></div></div></div>
 <p>
-          An example using 3-space vectors a bit like the tarray example.
+          An example using 3-space vectors, a bit like the tarray example.
         </p>
 <p>
 </p>
@@ -33,7 +33,7 @@
     <span class="keyword">auto</span> <span class="keyword">operator</span><span class="special">()</span> <span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">yap</span><span class="special">::</span><span class="identifier">terminal</span><span class="special">&lt;</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">yap</span><span class="special">::</span><span class="identifier">expression</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">array</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">,</span> <span class="number">3</span><span class="special">&gt;&gt;</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">expr</span><span class="special">)</span>
     <span class="special">{</span>
         <span class="keyword">int</span> <span class="identifier">x</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">yap</span><span class="special">::</span><span class="identifier">value</span><span class="special">(</span><span class="identifier">expr</span><span class="special">)[</span><span class="identifier">n</span><span class="special">];</span>
-        <span class="comment">// The move enforces the terminal to store the value of x, not a</span>
+        <span class="comment">// The move forces the terminal to store the value of x, not a</span>
         <span class="comment">// reference.</span>
         <span class="keyword">return</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">yap</span><span class="special">::</span><span class="identifier">make_terminal</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">move</span><span class="special">(</span><span class="identifier">x</span><span class="special">));</span>
     <span class="special">}</span>

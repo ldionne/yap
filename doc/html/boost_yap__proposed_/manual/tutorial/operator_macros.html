@@ -19,11 +19,12 @@
         Macros</a>
 </h4></div></div></div>
 <p>
-          There are macros that define binary operators as members and as nonmembers.
-          For a given operator the member-defining macro will define an operator
-          that accepts anything on the right (making a terminal out of a non-<a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a> operand);
-          the nonmember-defining macro will define an operator that will only accept
-          a non-<a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
+          There are macros that define binary operators as members and macros that
+          define them as nonmembers. For a given operator, the member-defining macro
+          will define an operator that accepts anything on the right (making a terminal
+          out of a non-<a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
+          operand); the nonmember-defining macro will define an operator that will
+          only accept a non-<a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
           on the left and an <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
           on the right. This is to avoid creating ambiguous overload sets. Here are
           the macros and their uses:
@@ -174,7 +175,7 @@
                   <p>
                     Free operators defined over types constrained by a pair of type
                     traits (e.g. a <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">map</span><span class="special">&lt;&gt;</span></code> on the left, and a <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;&gt;</span></code>
-                    on the right).
+                    on the right). Useful for type-asymmetric operators.
                   </p>
                 </td>
 <td>

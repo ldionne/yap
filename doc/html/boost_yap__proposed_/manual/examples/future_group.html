@@ -28,7 +28,7 @@
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">hana</span><span class="special">/</span><span class="identifier">concat</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
 
-<span class="comment">// A custom expression template for future groups.  They support operators ||</span>
+<span class="comment">// A custom expression template for future groups.  It supports operators ||</span>
 <span class="comment">// and &amp;&amp;.</span>
 <span class="keyword">template</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">yap</span><span class="special">::</span><span class="identifier">expr_kind</span> <span class="identifier">Kind</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">Tuple</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">future_expr</span>
@@ -50,8 +50,8 @@
     <span class="identifier">BOOST_YAP_USER_BINARY_OPERATOR_MEMBER</span><span class="special">(</span><span class="identifier">logical_and</span><span class="special">,</span> <span class="identifier">this_type</span><span class="special">,</span> <span class="special">::</span><span class="identifier">future_expr</span><span class="special">)</span>
 <span class="special">};</span>
 
-<span class="comment">// A special-cased future terminal the matches the semantics from the original</span>
-<span class="comment">// Proto example.</span>
+<span class="comment">// A special-cased future terminal that matches the semantics from the</span>
+<span class="comment">// original Proto example.</span>
 <span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">future</span> <span class="special">:</span>
     <span class="identifier">future_expr</span><span class="special">&lt;</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">yap</span><span class="special">::</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">terminal</span><span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">hana</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;&gt;</span>
@@ -89,9 +89,9 @@
             <span class="identifier">boost</span><span class="special">::</span><span class="identifier">hana</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">U</span><span class="special">&gt;</span>
         <span class="special">&gt;</span> <span class="keyword">const</span> <span class="special">&amp;</span> <span class="identifier">or_expr</span>
     <span class="special">)</span> <span class="special">{</span>
-        <span class="comment">// Assertion that left and right are comparable types.  We use value()</span>
+        <span class="comment">// Assertion that left and right are compatible types.  We use value()</span>
         <span class="comment">// here on the results of left() and right() because that makes the</span>
-        <span class="comment">// resulting expression the same, even if one is an expr_ref and the</span>
+        <span class="comment">// resulting expressions comparable if one is an expr_ref and the</span>
         <span class="comment">// other is not.</span>
         <span class="keyword">static_assert</span><span class="special">(</span>
             <span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span>

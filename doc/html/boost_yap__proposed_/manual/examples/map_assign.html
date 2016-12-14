@@ -29,7 +29,7 @@
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">iostream</span><span class="special">&gt;</span>
 
 
-<span class="comment">// This transform applies all the a call-subexpressions in a map_list_of</span>
+<span class="comment">// This transform applies all the call-subexpressions in a map_list_of</span>
 <span class="comment">// expression (a nested chain of call operations) as a side effect; the</span>
 <span class="comment">// expression returned by the transform is ignored.</span>
 <span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">Key</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">Value</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">Allocator</span><span class="special">&gt;</span>
@@ -118,7 +118,7 @@
 </tr>
 <tr><td align="left" valign="top"><p>
             <code class="computeroutput"><span class="identifier">map_list_of_expr</span></code> defines
-            a generic call operator that matches any call, including on with the
+            a generic call operator that matches any call, including one with the
             wrong number of arguments. This could be fixed by adding a <code class="computeroutput"><span class="keyword">static_assert</span><span class="special">()</span></code>
             to the <code class="computeroutput"><span class="identifier">map_list_of_expr</span></code>
             template, or by hand-writing the call operator with SFNIAE or concept
