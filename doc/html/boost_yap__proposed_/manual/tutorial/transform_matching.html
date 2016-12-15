@@ -75,8 +75,8 @@
         </p>
 <p>
           <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.tagtransform">TagTransforms</a>
-          are most useful when the transform needs to match expressions without regard
-          to whether its operands are <a class="link" href="../../../boost/yap/expr_kind.html#boost.yap.expr_kind.expr_ref"><code class="computeroutput"><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span></code></a> expressions, or -- if
+          are most useful when the transform needs to match an expression without
+          regard to whether its operands are <a class="link" href="../../../boost/yap/expr_kind.html#boost.yap.expr_kind.expr_ref"><code class="computeroutput"><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span></code></a> expressions, or -- if
           they are terminals -- whether they contain or refer to their values. <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.tagtransform">TagTransforms</a>
           tend to be far more concise.
         </p>
@@ -87,13 +87,13 @@
         </h6>
 <p>
           That "(loosely)" before probably bothered you, right? Me too.
-          For an expression <code class="computeroutput"><span class="identifier">expr</span></code>,
-          each parameter is passed to a <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.tagtransform">TagTransform</a>
+          Each non-tag parameter is passed to a <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.tagtransform">TagTransform</a>
           by calling an operand accessor appropriate to <code class="computeroutput"><span class="identifier">expr</span></code>'s
           kind, and then calling <code class="computeroutput"><a class="link" href="../../../boost/yap/value.html" title="Function template value">value()</a></code>
-          on the result. For example, for a plus expression, the <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.tagtransform">TagTransform</a>
+          on the result. For example, consider a plus expression <code class="computeroutput"><span class="identifier">expr</span></code>.
+          The <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.tagtransform">TagTransform</a>
           on a transform object <code class="computeroutput"><span class="identifier">xform</span></code>
-          will be called like this:
+          would be called like this:
         </p>
 <pre class="programlisting"><span class="identifier">xform</span><span class="special">(</span><span class="identifier">plus_tag</span><span class="special">,</span> <span class="identifier">value</span><span class="special">(</span><span class="identifier">left</span><span class="special">(</span><span class="identifier">expr</span><span class="special">)),</span> <span class="identifier">value</span><span class="special">(</span><span class="identifier">right</span><span class="special">(</span><span class="identifier">expr</span><span class="special">)))</span>
 </pre>
@@ -115,8 +115,8 @@
           <span class="special">&amp;</span></code> parameter. Finally, you can
           write <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.tagtransform">TagTransform</a>
           parameter types that can catch conversions; for instance, you can match
-          any negation expression containing terminal of a numeric type convertible
-          to <code class="computeroutput"><span class="keyword">double</span></code> like this:
+          any negation expression containing a terminal, <span class="bold"><strong>or
+          a reference to one</strong></span>, containing a value convertible to <code class="computeroutput"><span class="keyword">double</span></code> like this:
         </p>
 <pre class="programlisting"><span class="keyword">struct</span> <span class="identifier">xform</span>
 <span class="special">{</span>
@@ -125,9 +125,13 @@
 <span class="special">}</span>
 </pre>
 <p>
-          That will match negations of <code class="computeroutput"><span class="keyword">unsigned</span>
-          <span class="keyword">int</span></code>s, <code class="computeroutput"><span class="keyword">int</span></code>s,
-          <code class="computeroutput"><span class="keyword">float</span></code>s, etc.
+          That will match a negation of a terminal containing an <code class="computeroutput"><span class="keyword">unsigned</span>
+          <span class="keyword">int</span></code>, <code class="computeroutput"><span class="keyword">unsigned</span>
+          <span class="keyword">int</span> <span class="special">&amp;</span></code>,
+          <code class="computeroutput"><span class="keyword">int</span> <span class="keyword">const</span>
+          <span class="special">&amp;</span></code>, <code class="computeroutput"><span class="keyword">float</span>
+          <span class="special">&amp;&amp;</span></code>, etc. It will also match
+          a negation of a reference to such a terminal.
         </p>
 <h6>
 <a name="boost_yap__proposed_.manual.tutorial.transform_matching.h1"></a>
@@ -141,8 +145,9 @@
           and there will not be any ambiguity. The <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.tagtransform">TagTransform</a>
           is prefered, except in the case of a call expression, in which case the
           <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expressiontransform">ExpressionTransform</a>
-          is preferred. I know, I know. Save youself some headaches and mix the two
-          kinds of overloads as little as possible.
+          is preferred. I know, I know. You don't have to worry about amiguity, but
+          save youself some confusion and mix the two kinds of overloads as little
+          as possible.
         </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>

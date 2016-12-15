@@ -46,8 +46,8 @@
       exists because we want to be able to do this without incurring unnecessay copies
       or moves. Consider <code class="computeroutput"><span class="identifier">v2</span></code> and
       <code class="computeroutput"><span class="identifier">v3</span></code> in this snippet from the
-      Lazy Vector example. They are terminals that each owns its value, rather than
-      referring to it.
+      Lazy Vector example. Each is a terminal that owns its value, rather than referring
+      to it.
     </p>
 <pre class="programlisting"><span class="identifier">lazy_vector</span> <span class="identifier">v2</span><span class="special">{{</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span><span class="keyword">double</span><span class="special">&gt;(</span><span class="number">4</span><span class="special">,</span> <span class="number">2.0</span><span class="special">)}};</span>
 <span class="identifier">lazy_vector</span> <span class="identifier">v3</span><span class="special">{{</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span><span class="keyword">double</span><span class="special">&gt;(</span><span class="number">4</span><span class="special">,</span> <span class="number">3.0</span><span class="special">)}};</span>

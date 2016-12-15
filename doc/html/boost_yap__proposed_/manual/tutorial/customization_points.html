@@ -29,7 +29,9 @@
           and <code class="computeroutput"><a class="link" href="../../../boost/yap/transform.html" title="Function template transform">evaluate_as()</a></code>.
         </p>
 <p>
-          For example: first we define a UDT and an override of Boost.YAP's <code class="computeroutput"><span class="identifier">eval_plus</span></code> for it:
+          For example: first we define a UDT <code class="computeroutput"><span class="identifier">number</span></code>
+          and an override of Boost.YAP's <code class="computeroutput"><span class="identifier">eval_plus</span></code>
+          for it,
         </p>
 <p>
 </p>
@@ -48,8 +50,8 @@
 <p>
         </p>
 <p>
-          Then we use it to evaluate expressions containing UDT values, even though
-          there is no user-defined plus operator for the UDT:
+          then we use it to evaluate expressions containing <code class="computeroutput"><span class="identifier">number</span></code>s,
+          even though there is no user-defined plus operator for <code class="computeroutput"><span class="identifier">number</span></code>:
         </p>
 <p>
 </p>
@@ -66,10 +68,11 @@
         </p>
 <p>
           There is a customization point for each operator (including <code class="computeroutput"><span class="identifier">if_else</span></code>), one for doing implicit transforms
-          during evaluation, <code class="computeroutput"><span class="identifier">transform_expression</span><span class="special">()</span></code>, and yet one more for replacing the entire
+          during evaluation, called <code class="computeroutput"><span class="identifier">transform_expression</span><span class="special">()</span></code>, and yet one more for replacing the entire
           implementation of <code class="computeroutput"><a class="link" href="../../../boost/yap/transform.html" title="Function template transform">evaluate_as()</a></code>,
-          <code class="computeroutput"><span class="identifier">eval_expression_as</span><span class="special">()</span></code>.
-          The complete list of the customization points can be found in the <code class="computeroutput"><span class="identifier">function_objects</span></code> namespace in the <code class="computeroutput"><a class="link" href="../../../header/boost/yap/operators_hpp.html" title="Header &lt;boost/yap/operators.hpp&gt;">operators header</a></code>.
+          called <code class="computeroutput"><span class="identifier">eval_expression_as</span><span class="special">()</span></code>. The complete list of the customization
+          points can be found in the <code class="computeroutput"><span class="identifier">function_objects</span></code>
+          namespace in the <code class="computeroutput"><a class="link" href="../../../header/boost/yap/operators_hpp.html" title="Header &lt;boost/yap/operators.hpp&gt;">operators header</a></code>.
         </p>
 <p>
           You just saw an example of an operator customization point above. Here's
@@ -101,7 +104,7 @@
 <p>
         </p>
 <p>
-          The <code class="computeroutput"><span class="identifier">eval_expression_as</span><span class="special">()</span></code> works similarly.
+          The <code class="computeroutput"><span class="identifier">eval_expression_as</span><span class="special">()</span></code> customization point works similarly.
         </p>
 <p>
           You can create as many overloads of a customization point <code class="computeroutput"><span class="identifier">C</span></code> as you like. If there are 100 overloads
@@ -139,7 +142,7 @@
             Subexpressions of <code class="computeroutput"><span class="identifier">expr</span></code>
             are not evaluated recursively, and in fact they are not evaluated at
             all! The arguments passed to <code class="computeroutput"><span class="identifier">transform_expression</span><span class="special">()</span></code> are <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expressions</a>,
-            not values.
+            not evaluated values.
           </p></td></tr>
 </table></div>
 <p>
@@ -181,7 +184,7 @@
 <p>
           and since <code class="computeroutput"><span class="identifier">evaluate</span><span class="special">()</span></code>
           is called on each operand in the transform, the transform is applied to
-          each subexpression here, and then to the top-level expression:
+          each parenthesized subexpression here, and then to the top-level expression:
         </p>
 <p>
 </p>
@@ -199,10 +202,12 @@
 <p>
           The <code class="computeroutput"><span class="identifier">eval_expression_as</span><span class="special">()</span></code> customization point is only applied at
           the top level, replacing a call to Boost.YAP's version. Like <code class="computeroutput"><span class="identifier">transform_expression</span><span class="special">()</span></code>,
-          it is not applied recursively, and is passed an expression.
+          it subverts the normal recursive evaluation of the expression being evaluated.
+          Also like <code class="computeroutput"><span class="identifier">transform_expression</span><span class="special">()</span></code>, it is passed an <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>.
         </p>
 <p>
-          This may be useful if you want to evaluate an expression in a very different
+          <code class="computeroutput"><span class="identifier">eval_expression_as</span><span class="special">()</span></code>
+          may be useful if you want to evaluate an expression in a very different
           way depending on what the desired result type is.
         </p>
 <div class="note"><table border="0" summary="Note">
@@ -222,10 +227,10 @@
           The Other Customization Points Are Applied</a>
         </h6>
 <p>
-          <code class="computeroutput"><a class="link" href="../../../boost/yap/transform.html" title="Function template transform">evaluate()</a></code> and <code class="computeroutput"><a class="link" href="../../../boost/yap/transform.html" title="Function template transform">evaluate_as()</a></code>
-          each evaluate its given expression recursively, leaves-to-root. For any
-          given subexpression <code class="computeroutput"><span class="identifier">E</span></code> of
-          kind <code class="computeroutput"><span class="identifier">K</span></code> with subexpressions
+          Each of <code class="computeroutput"><a class="link" href="../../../boost/yap/transform.html" title="Function template transform">evaluate()</a></code> and <code class="computeroutput"><a class="link" href="../../../boost/yap/transform.html" title="Function template transform">evaluate_as()</a></code>
+          evaluates its given expression recursively, depth first. For any given
+          subexpression <code class="computeroutput"><span class="identifier">E</span></code> of kind
+          <code class="computeroutput"><span class="identifier">K</span></code> with subexpressions
           <code class="computeroutput"><span class="identifier">S0</span></code> ... <code class="computeroutput"><span class="identifier">Sn</span></code>,
           <code class="computeroutput"><span class="identifier">E</span></code> is evaluated as:
         </p>
@@ -241,8 +246,11 @@
           to all plus operations in an expression tree, even nested ones.
         </p>
 <p>
-          All the customization points except <code class="computeroutput"><span class="identifier">transform_expression</span><span class="special">()</span></code> and <code class="computeroutput"><span class="identifier">eval_expression_as</span><span class="special">()</span></code> receive values in their arguments, not
-          <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expressions</a>.
+          All the customization points except <code class="computeroutput"><span class="identifier">transform_expression</span><span class="special">()</span></code> and <code class="computeroutput"><span class="identifier">eval_expression_as</span><span class="special">()</span></code> receive evaluated values in their arguments,
+          not <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expressions</a>.
+          That is, unless some of the evaluated values happen to be <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expressions</a>
+          -- you may have written an expression that evaluates to an expression.
+          You may also be a weirdo.
         </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>

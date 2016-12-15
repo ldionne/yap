@@ -45,7 +45,7 @@
           to be an rvalue, whether wrapped in a terminal or not.
         </p>
 <p>
-          Let's take a quick look at <code class="computeroutput"><a class="link" href="../../../boost/yap/make_te_idp140686519048232.html" title="Function template make_terminal">make_terminal()</a></code>.
+          Let's take a quick look at <code class="computeroutput"><a class="link" href="../../../boost/yap/make_te_idp140346839047160.html" title="Function template make_terminal">make_terminal()</a></code>.
           If you call it with a <code class="computeroutput"><span class="identifier">T</span></code>
           rvalue, the terminal's value type is a <code class="computeroutput"><span class="identifier">T</span></code>,
           and the rvalue gets moved into it. If you call it with a <code class="computeroutput"><span class="identifier">T</span> <span class="special">[</span><span class="keyword">const</span><span class="special">]</span></code> lvalue, the value type is <code class="computeroutput"><span class="identifier">T</span> <span class="special">[</span><span class="keyword">const</span><span class="special">]</span> <span class="special">&amp;</span></code>,
@@ -84,7 +84,7 @@
 <p>
           Ok, so since you can build these lazy Boost.YAP expressions up from subexpressions,
           how do we treat the subexpressions? We treat them in exactly the same way
-          as <code class="computeroutput"><a class="link" href="../../../boost/yap/make_te_idp140686519048232.html" title="Function template make_terminal">make_terminal()</a></code> treats its operands. Rvalues
+          as <code class="computeroutput"><a class="link" href="../../../boost/yap/make_te_idp140346839047160.html" title="Function template make_terminal">make_terminal()</a></code> treats its operands. Rvalues
           are moved in, and lvalues are captured by (possibly <code class="computeroutput"><span class="keyword">const</span></code>)
           reference.
         </p>
@@ -118,7 +118,7 @@
           Boost.YAP does a partial decay on non-<a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
           operands, in which <code class="computeroutput"><span class="identifier">cv</span></code> and
           reference qualifiers are left unchanged, but arrays are decayed to pointers
-          and functions are decayed to function pointers. <code class="computeroutput"><span class="identifier">DECAY</span><span class="special">(</span><span class="identifier">T</span><span class="special">)</span></code>
+          and functions are decayed to function pointers. <code class="computeroutput"><span class="identifier">PARTIAL_DECAY</span><span class="special">(</span><span class="identifier">T</span><span class="special">)</span></code>
           indicates such a partial decay of <code class="computeroutput"><span class="identifier">T</span></code>.
         </p>
 <div class="table">
@@ -157,7 +157,7 @@
 <td>
                   <p>
                     <code class="computeroutput"><span class="identifier">expr</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">terminal</span><span class="special">,</span>
-                    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">hana</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">DECAY</span><span class="special">(</span><span class="identifier">T</span><span class="special">)</span>
+                    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">hana</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">PARTIAL_DECAY</span><span class="special">(</span><span class="identifier">T</span><span class="special">)</span>
                     <span class="keyword">const</span> <span class="special">&amp;&gt;&gt;</span></code>
                   </p>
                 </td>
@@ -173,7 +173,7 @@
 <td>
                   <p>
                     <code class="computeroutput"><span class="identifier">expr</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">terminal</span><span class="special">,</span>
-                    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">hana</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">DECAY</span><span class="special">(</span><span class="identifier">T</span><span class="special">)</span>
+                    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">hana</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">PARTIAL_DECAY</span><span class="special">(</span><span class="identifier">T</span><span class="special">)</span>
                     <span class="special">&amp;&gt;&gt;</span></code>
                   </p>
                 </td>
@@ -189,7 +189,7 @@
 <td>
                   <p>
                     <code class="computeroutput"><span class="identifier">expr</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">terminal</span><span class="special">,</span>
-                    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">hana</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">DECAY</span><span class="special">(</span><span class="identifier">T</span><span class="special">)&gt;&gt;</span></code>
+                    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">hana</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">PARTIAL_DECAY</span><span class="special">(</span><span class="identifier">T</span><span class="special">)&gt;&gt;</span></code>
                   </p>
                 </td>
 <td>
