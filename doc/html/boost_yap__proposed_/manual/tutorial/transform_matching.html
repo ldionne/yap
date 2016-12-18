@@ -89,21 +89,26 @@
           That "(loosely)" before probably bothered you, right? Me too.
           Each non-tag parameter is passed to a <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.tagtransform">TagTransform</a>
           by calling an operand accessor appropriate to <code class="computeroutput"><span class="identifier">expr</span></code>'s
-          kind, and then calling <code class="computeroutput"><a class="link" href="../../../boost/yap/value.html" title="Function template value">value()</a></code>
+          kind, and then calling a terminal-specific version of <code class="computeroutput"><a class="link" href="../../../boost/yap/value.html" title="Function template value">value()</a></code>
+          (<code class="computeroutput"><span class="identifier">terminal_value</span><span class="special">()</span></code>)
           on the result. For example, consider a plus expression <code class="computeroutput"><span class="identifier">expr</span></code>.
           The <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.tagtransform">TagTransform</a>
           on a transform object <code class="computeroutput"><span class="identifier">xform</span></code>
           would be called like this:
         </p>
-<pre class="programlisting"><span class="identifier">xform</span><span class="special">(</span><span class="identifier">plus_tag</span><span class="special">,</span> <span class="identifier">value</span><span class="special">(</span><span class="identifier">left</span><span class="special">(</span><span class="identifier">expr</span><span class="special">)),</span> <span class="identifier">value</span><span class="special">(</span><span class="identifier">right</span><span class="special">(</span><span class="identifier">expr</span><span class="special">)))</span>
+<pre class="programlisting"><span class="identifier">xform</span><span class="special">(</span><span class="identifier">plus_tag</span><span class="special">,</span> <span class="identifier">terminal_value</span><span class="special">(</span><span class="identifier">left</span><span class="special">(</span><span class="identifier">expr</span><span class="special">)),</span> <span class="identifier">terminal_value</span><span class="special">(</span><span class="identifier">right</span><span class="special">(</span><span class="identifier">expr</span><span class="special">)))</span>
 </pre>
 <p>
           The operand accessors (<code class="computeroutput"><a class="link" href="../../../boost/yap/left.html" title="Function template left">left()</a></code>
           and <code class="computeroutput"><a class="link" href="../../../boost/yap/right.html" title="Function template right">right()</a></code> in this example) all dereference
           <a class="link" href="../../../boost/yap/expr_kind.html#boost.yap.expr_kind.expr_ref"><code class="computeroutput"><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span></code></a>
-          expressions before operating on them, and <code class="computeroutput"><a class="link" href="../../../boost/yap/value.html" title="Function template value">value()</a></code>
-          does the same. When given a terminal, <code class="computeroutput"><a class="link" href="../../../boost/yap/value.html" title="Function template value">value()</a></code>
-          also returns the value of the terminal.
+          expressions before operating on them, and <code class="computeroutput"><span class="identifier">terminal_value</span><span class="special">()</span></code> does the same.
+        </p>
+<p>
+          <code class="computeroutput"><span class="identifier">terminal_value</span><span class="special">()</span></code>
+          works just like <code class="computeroutput"><a class="link" href="../../../boost/yap/value.html" title="Function template value">value()</a></code>, except that it does not
+          take the value of a unary expression; it just forwards it through. It still
+          takes values out of terminals and unwraps <a class="link" href="../../../boost/yap/expr_kind.html#boost.yap.expr_kind.expr_ref"><code class="computeroutput"><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span></code></a> expressions, though.
         </p>
 <p>
           The result of this pattern is that you can effectively ignore the presence
