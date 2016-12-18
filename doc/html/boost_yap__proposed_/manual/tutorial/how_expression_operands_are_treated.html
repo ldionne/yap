@@ -27,9 +27,9 @@
           The guiding design principle here is that an expression built using Boost.YAP
           should match the semantics of a builtin C++ expression as closely as possible.
           This implies that an rvalue remain treatable as a temporary (as it may
-          in fact be) throughout the building and transformation of an expression,
-          and that an lvalue should retain its connection to the underlying named
-          entity to which it refers.
+          in fact have initially been) throughout the building and transformation
+          of an expression, and that an lvalue should retain its connection to the
+          underlying named entity to which it refers.
         </p>
 <p>
           For example, if you see
@@ -45,7 +45,7 @@
           to be an rvalue, whether wrapped in a terminal or not.
         </p>
 <p>
-          Let's take a quick look at <code class="computeroutput"><a class="link" href="../../../boost/yap/make_te_idp140253085267448.html" title="Function template make_terminal">make_terminal()</a></code>.
+          Let's take a quick look at <code class="computeroutput"><a class="link" href="../../../boost/yap/make_te_idp140493725918280.html" title="Function template make_terminal">make_terminal()</a></code>.
           If you call it with a <code class="computeroutput"><span class="identifier">T</span></code>
           rvalue, the terminal's value type is a <code class="computeroutput"><span class="identifier">T</span></code>,
           and the rvalue gets moved into it. If you call it with a <code class="computeroutput"><span class="identifier">T</span> <span class="special">[</span><span class="keyword">const</span><span class="special">]</span></code> lvalue, the value type is <code class="computeroutput"><span class="identifier">T</span> <span class="special">[</span><span class="keyword">const</span><span class="special">]</span> <span class="special">&amp;</span></code>,
@@ -84,9 +84,8 @@
 <p>
           Ok, so since you can build these lazy Boost.YAP expressions up from subexpressions,
           how do we treat the subexpressions? We treat them in exactly the same way
-          as <code class="computeroutput"><a class="link" href="../../../boost/yap/make_te_idp140253085267448.html" title="Function template make_terminal">make_terminal()</a></code> treats its operands. Rvalues
-          are moved in, and lvalues are captured by (possibly <code class="computeroutput"><span class="keyword">const</span></code>)
-          reference.
+          as <code class="computeroutput"><a class="link" href="../../../boost/yap/make_te_idp140493725918280.html" title="Function template make_terminal">make_terminal()</a></code> treats its parameter.
+          Rvalues are moved in, and lvalues are captured by (possibly <code class="computeroutput"><span class="keyword">const</span></code>) reference.
         </p>
 <div class="note"><table border="0" summary="Note">
 <tr>
@@ -112,7 +111,7 @@
         </p>
 <p>
           So, given the rules so far, here is a comprehensive breakdown of what happens
-          when an operand is passed to a Boost.YAP operator. In this table, <code class="computeroutput"><span class="identifier">expr</span></code> is an <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expressiontemplate">ExpressionTemplate</a>,
+          when an operand is passed to a Boost.YAP operator. In this table, <code class="computeroutput"><span class="identifier">expr_tmpl</span></code> is an <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expressiontemplate">ExpressionTemplate</a>,
           and <code class="computeroutput"><span class="identifier">T</span></code> is a non-<a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
           type. <code class="computeroutput"><span class="identifier">E</span></code> refers to any non-<code class="computeroutput"><span class="identifier">expr_ref</span></code> <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>.
           Boost.YAP does a partial decay on non-<a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
@@ -156,7 +155,7 @@
                 </td>
 <td>
                   <p>
-                    <code class="computeroutput"><span class="identifier">expr</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">terminal</span><span class="special">,</span>
+                    <code class="computeroutput"><span class="identifier">expr_tmpl</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">terminal</span><span class="special">,</span>
                     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">hana</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">PARTIAL_DECAY</span><span class="special">(</span><span class="identifier">T</span><span class="special">)</span>
                     <span class="keyword">const</span> <span class="special">&amp;&gt;&gt;</span></code>
                   </p>
@@ -172,7 +171,7 @@
                 </td>
 <td>
                   <p>
-                    <code class="computeroutput"><span class="identifier">expr</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">terminal</span><span class="special">,</span>
+                    <code class="computeroutput"><span class="identifier">expr_tmpl</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">terminal</span><span class="special">,</span>
                     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">hana</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">PARTIAL_DECAY</span><span class="special">(</span><span class="identifier">T</span><span class="special">)</span>
                     <span class="special">&amp;&gt;&gt;</span></code>
                   </p>
@@ -188,7 +187,7 @@
                 </td>
 <td>
                   <p>
-                    <code class="computeroutput"><span class="identifier">expr</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">terminal</span><span class="special">,</span>
+                    <code class="computeroutput"><span class="identifier">expr_tmpl</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">terminal</span><span class="special">,</span>
                     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">hana</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">PARTIAL_DECAY</span><span class="special">(</span><span class="identifier">T</span><span class="special">)&gt;&gt;</span></code>
                   </p>
                 </td>
@@ -207,7 +206,7 @@
                 </td>
 <td>
                   <p>
-                    <code class="computeroutput"><span class="identifier">expr</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span><span class="special">,</span>
+                    <code class="computeroutput"><span class="identifier">expr_tmpl</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span><span class="special">,</span>
                     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">hana</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">E</span> <span class="keyword">const</span>
                     <span class="special">&amp;&gt;&gt;</span></code>
                   </p>
@@ -223,7 +222,7 @@
                 </td>
 <td>
                   <p>
-                    <code class="computeroutput"><span class="identifier">expr</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span><span class="special">,</span>
+                    <code class="computeroutput"><span class="identifier">expr_tmpl</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span><span class="special">,</span>
                     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">hana</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">E</span> <span class="special">&amp;&gt;&gt;</span></code>
                   </p>
                 </td>
@@ -250,14 +249,14 @@
 <tr>
 <td>
                   <p>
-                    <code class="computeroutput"><span class="identifier">expr</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span><span class="special">,</span>
+                    <code class="computeroutput"><span class="identifier">expr_tmpl</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span><span class="special">,</span>
                     <span class="special">...&gt;</span> <span class="keyword">const</span>
                     <span class="special">&amp;</span></code>
                   </p>
                 </td>
 <td>
                   <p>
-                    <code class="computeroutput"><span class="identifier">expr</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span><span class="special">,</span>
+                    <code class="computeroutput"><span class="identifier">expr_tmpl</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span><span class="special">,</span>
                     <span class="special">...&gt;</span></code>
                   </p>
                 </td>
@@ -267,13 +266,13 @@
 <tr>
 <td>
                   <p>
-                    <code class="computeroutput"><span class="identifier">expr</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span><span class="special">,</span>
+                    <code class="computeroutput"><span class="identifier">expr_tmpl</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span><span class="special">,</span>
                     <span class="special">...&gt;</span> <span class="special">&amp;</span></code>
                   </p>
                 </td>
 <td>
                   <p>
-                    <code class="computeroutput"><span class="identifier">expr</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span><span class="special">,</span>
+                    <code class="computeroutput"><span class="identifier">expr_tmpl</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span><span class="special">,</span>
                     <span class="special">...&gt;</span></code>
                   </p>
                 </td>
@@ -283,13 +282,13 @@
 <tr>
 <td>
                   <p>
-                    <code class="computeroutput"><span class="identifier">expr</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span><span class="special">,</span>
+                    <code class="computeroutput"><span class="identifier">expr_tmpl</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span><span class="special">,</span>
                     <span class="special">...&gt;</span> <span class="special">&amp;&amp;</span></code>
                   </p>
                 </td>
 <td>
                   <p>
-                    <code class="computeroutput"><span class="identifier">expr</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span><span class="special">,</span>
+                    <code class="computeroutput"><span class="identifier">expr_tmpl</span><span class="special">&lt;</span><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span><span class="special">,</span>
                     <span class="special">...&gt;</span></code>
                   </p>
                 </td>

@@ -107,8 +107,9 @@
 <p>
           <code class="computeroutput"><span class="identifier">terminal_value</span><span class="special">()</span></code>
           works just like <code class="computeroutput"><a class="link" href="../../../boost/yap/value.html" title="Function template value">value()</a></code>, except that it does not
-          take the value of a unary expression; it just forwards it through. It still
-          takes values out of terminals and unwraps <a class="link" href="../../../boost/yap/expr_kind.html#boost.yap.expr_kind.expr_ref"><code class="computeroutput"><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span></code></a> expressions, though.
+          take the value of a <span class="bold"><strong>nonterminal</strong></span> unary
+          expression; it just forwards it through. It still takes values out of terminals
+          and unwraps <a class="link" href="../../../boost/yap/expr_kind.html#boost.yap.expr_kind.expr_ref"><code class="computeroutput"><span class="identifier">expr_kind</span><span class="special">::</span><span class="identifier">expr_ref</span></code></a> expressions, though.
         </p>
 <p>
           The result of this pattern is that you can effectively ignore the presence

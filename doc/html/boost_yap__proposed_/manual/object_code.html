@@ -650,10 +650,10 @@
 <p>
         In general, the expression trees produced by Boost.YAP get evaluated down
         to something close to the hand-written equivalent. There is an abstraction
-        penalty, but it is small for reasonably-sized expressions. Somewhere between
-        35 and 45 terminals in an arithmetic-only expression, Clang 4.0 can no longer
-        inline the entire expression, and poorer code results (including uninlined
-        function calls).
+        penalty, but it is small for reasonably-sized expressions. For instance,
+        with somewhere between 35 and 45 terminals in an arithmetic-only expression,
+        Clang 4.0 can no longer inline the entire expression, and poorer code results
+        (including uninlined function calls).
       </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>

@@ -80,7 +80,8 @@
                 </td>
 <td>
                   <p>
-                    Any type.
+                    <code class="computeroutput"><span class="keyword">decltype</span><span class="special">(*</span><span class="keyword">this</span><span class="special">)</span></code>,
+                    an <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>.
                   </p>
                 </td>
 <td>
@@ -104,7 +105,8 @@
                 </td>
 <td>
                   <p>
-                    Any type.
+                    <code class="computeroutput"><span class="keyword">decltype</span><span class="special">(*</span><span class="keyword">this</span><span class="special">)</span></code>,
+                    an <a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>.
                   </p>
                 </td>
 <td>
@@ -147,8 +149,8 @@
                 </td>
 <td>
                   <p>
-                    Free operators defined over types constrained by a type trait
-                    (e.g. all <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">map</span><span class="special">&lt;&gt;</span></code>s).
+                    Free operators defined over non-<a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
+                    types constrained by a type trait (e.g. all <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">map</span><span class="special">&lt;&gt;</span></code>s).
                   </p>
                 </td>
 <td>
@@ -173,9 +175,10 @@
                 </td>
 <td>
                   <p>
-                    Free operators defined over types constrained by a pair of type
-                    traits (e.g. a <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">map</span><span class="special">&lt;&gt;</span></code> on the left, and a <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;&gt;</span></code>
-                    on the right). Useful for type-asymmetric operators.
+                    Free operators defined over non-<a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
+                    types constrained by a pair of type traits (e.g. a <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">map</span><span class="special">&lt;&gt;</span></code>
+                    on the left, and a <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;&gt;</span></code> on the right). Useful
+                    for type-asymmetric operators.
                   </p>
                 </td>
 <td>
@@ -201,9 +204,9 @@
                 </td>
 <td>
                   <p>
-                    Free operators defined over pairs of types, one constrained by
-                    a type trait and one not (e.g. a <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">list</span><span class="special">&lt;&gt;</span></code> on either side, and anything
-                    on the other).
+                    Free operators defined over pairs of non-<a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
+                    types, one constrained by a type trait and one not (e.g. a <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">list</span><span class="special">&lt;&gt;</span></code>
+                    on either side, and anything on the other).
                   </p>
                 </td>
 <td>
@@ -307,8 +310,9 @@
                 </td>
 <td>
                   <p>
-                    Free <code class="computeroutput"><span class="identifier">if_else</span><span class="special">()</span></code> function that requires at least
-                    one parameter to satisfy the given type trait.
+                    Free <code class="computeroutput"><span class="identifier">if_else</span><span class="special">()</span></code> function for non-<a class="link" href="../../concepts.html#boost_yap__proposed_.concepts.expression">Expression</a>
+                    types that requires at least one parameter to satisfy the given
+                    type trait.
                   </p>
                 </td>
 <td>
